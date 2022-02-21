@@ -7,13 +7,15 @@ import { HeaderComponent } from './component/header/header.component';
 import { ProductComponent } from './component/product/product.component';
 import { CartComponent } from './component/cart/cart.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CheckoutComponent } from './component/checkout/checkout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     ProductComponent,
-    CartComponent
+    CartComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
