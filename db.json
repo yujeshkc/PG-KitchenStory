@@ -1,0 +1,123 @@
+{
+  "products": [
+    {
+      "id": 100,
+      "title": "Red Tomato",
+      "description": "Red tomato from Brazil",
+      "price": 2.99,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 101,
+      "title": "Potato",
+      "description": "Red potaoto from Peru",
+      "price": 3.74,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 102,
+      "title": "Broccoli",
+      "description": "Broccoli from USA",
+      "price": 1.99,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 103,
+      "title": "Carrot",
+      "description": "Carrot from Brazil",
+      "price": 2.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 104,
+      "title": "Carrot",
+      "description": "Carrot from Brazil",
+      "price": 1.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 105,
+      "title": "Mushroom",
+      "description": "Mushroom from USA",
+      "price": 2.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 106,
+      "title": "Pumpkin",
+      "description": "Pumpkin from USA",
+      "price": 2.24,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 107,
+      "title": "Radish",
+      "description": "Radish from Bhaktapur",
+      "price": 2.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 108,
+      "title": "Turnip",
+      "description": "Turnip from Kathmandu",
+      "price": 1.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 109,
+      "title": "Beetroot",
+      "description": "Beetroot from India",
+      "price": 4.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "id": 110,
+      "title": "Cabbage",
+      "description": "Cabbage from India",
+      "price": 1.15,
+      "unit": "KG",
+      "image": "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
+      "category": "vegitables"
+    },
+    {
+      "title": "sadfsdfsdaf",
+      "slug": "sadfsdfsdaf",
+      "price": "",
+      "detail": "asdfdsafaf",
+      "unit": "",
+      "image": "",
+      "category": "asdfds",
+      "seoTitle": "asdff",
+      "seoDetail": "asfdasf",
+      "id": 111
+    }
+  ],
+  "users": [
+    {
+      "username": "admin",
+      "password": "admin",
+      "usertype": "admin"
+    }
+  ],
+  "payments": []
+}

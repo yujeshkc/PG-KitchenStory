@@ -7,12 +7,26 @@ import {map} from 'rxjs/operators';
 })
 export class ApiService {
 
+  
+
   constructor(private http: HttpClient) { }
 
+  private url:string= "http://localhost:3011/products";
+
+  //get all product
   getProduct(){
-    return this.http.get<any>("https://fakestoreapi.com/products")
+    return this.http.get<any>(this.url)
     .pipe(map((res:any)=>{
       return res;
     }))
   }
+
+
+  //add product
+  public addProduct(product: any){
+    return this.http.post(this.url,product);
+  }
+  
+
+
 }

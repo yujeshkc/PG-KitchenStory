@@ -1,6 +1,7 @@
 import { UpperCasePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ApiService } from 'src/app/service/api.service';
 
 @Component({
   selector: 'app-create',
@@ -11,16 +12,18 @@ export class CreateComponent implements OnInit {
 
   public createProduct: FormGroup;
   
-  constructor(private formBuilder: FormBuilder ) { 
+  constructor(private formBuilder: FormBuilder, private productService: ApiService ) { 
     this.createProduct = this.formBuilder.group({
       title:['', [Validators.required]],
       slug:['',[Validators.required, Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]],
+      price:[''],
+      inStock:['',[Validators.required]],
       detail:[''],
+      unit:[''],
       image:[''],
       category:['', [Validators.required]],
       seoTitle:[''],
       seoDetail:['']
-
     });
   }
 
@@ -31,9 +34,14 @@ export class CreateComponent implements OnInit {
   public onSubmit(createProduct: any){
     if(createProduct.valid) {
       console.log(this.createProduct.value);
+      this.productService.addProduct(this.createProduct.value).subscribe(res=>{
+        console.log(res);
+        console.log("prodct created ");
+      });
     }  else {
-      console.log("invalid form");
       this.validate(createProduct);
+      console.log(this.createProduct);
+      console.log("invalid form");      
     }
   }
 
