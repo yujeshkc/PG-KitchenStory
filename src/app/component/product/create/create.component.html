@@ -1,0 +1,122 @@
+<section class="block my-6">
+    <div class="max-w-4xl m-auto">
+        <span class="text-xl mb-6 block font-bold">Add Product</span>
+        <div class="md:grid md:grid-cols-3 md:gap-6">
+            
+            <div class="md:col-span-1">
+               <div class="shadow overflow-hidden sm:rounded-md bg-white top-20 sticky">
+                    <ul class="">
+                        <li><a (click)="scrollTo('general')"  class="cursor-pointer block p-4 border-b border-gray-100">General</a></li>
+                        <li><a (click)="scrollTo('media')" class="cursor-pointer block p-4 border-b border-gray-100">Media</a></li>
+                        <li><a (click)="scrollTo('meta-tags')" class="cursor-pointer block p-4 border-b border-gray-100">Category and Tags</a></li>
+                        <li><a  (click)="scrollTo('meta-seo')" class="cursor-pointer block p-4 border-b border-gray-100">SEO</a></li>
+                        
+                    </ul>
+               </div>
+            </div>
+            <div class="mt-5 md:mt-0 md:col-span-2">
+               
+                <form novalidate [formGroup] = "createProduct" (ngSubmit)="onSubmit(createProduct)">
+                    <div id="general" class="shadow overflow-hidden sm:rounded-md ">
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                          <div class="grid grid-cols-6 gap-6">
+
+                            <div class="col-span-6">
+                              <label for="product-name" class="block text-sm font-medium text-gray-700">Product Name</label>
+                              <input type="text"
+                              formControlName="title"
+                              name="title" id="product-name" autocomplete="given-name" 
+                              class="bg-gray-100   mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-600 rounded-md p-2"
+                              [class]="hasError('title')?'border-red-700 border-2':'' "
+                              ng-model="title"
+                              (change)="titleToSlug('11')"
+                              >
+                              <div 
+                              *ngIf="hasError('title')"
+                              class="">
+                                <div  *ngIf="title?.errors">
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="title?.errors?.['required']">Title is required fields</span>
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <div class="col-span-6">
+                                <label for="company-website" class="block text-sm font-medium text-gray-700">
+                                  Slug
+                                </label>
+                                <div class="mt-1 flex rounded-md shadow-sm">
+                                  <span class="inline-flex items-center px-3 rounded-l-md border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-sm p-2">
+                                    http://example.com/
+                                  </span>
+                                  <input type="text" name="company-website" id="company-website" class="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm  border border-gray-300 p-2 bg-gray-100 w-full" placeholder="product-name-1" spellcheck="false" data-ms-editor="true"
+                                  formControlName="slug" >
+                                </div>
+                              </div>
+
+                            <div class="col-span-6">
+                                <label for="product-detail" class="block text-sm font-medium text-gray-700">Product Detail</label>
+                                <textarea
+                                rows="10"
+                                formControlName="detail"
+                                name="detail" id="product-name" autocomplete="given-name" class="bg-gray-100   mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-600 rounded-md p-2"></textarea>
+                            </div>
+              
+                            
+              
+                      
+                         
+                          </div>
+                        </div>
+                        <div class="px-4 py-3 bg-gray-50 text-right sm:px-6">
+                          <button type="submit" class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">Save</button>
+                        </div>
+                    </div>
+
+                    <div id="media" class="shadow overflow-hidden sm:rounded-md mt-10">
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                        <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">Image</label>
+                        <div class="justify-center">
+                            <div class="mb-3 w-full">                              
+                              <input class="custom-file-input w-full rounded" id="formFileLg" type="file">
+                            </div>
+                          </div>
+                          </div>
+                    </div>
+
+
+                    <div id="meta-tags" class="shadow overflow-hidden sm:rounded-md mt-10">
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                        <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">Category</label>
+                        <div class="justify-center">
+                            <div class="mb-3 w-full">                              
+                              <input class="w-full rounded p-2 border" id="formFileLg" type="input">
+                            </div>
+                          </div>
+                          </div>
+                    </div>
+
+
+                    <div id="meta-seo" class="shadow overflow-hidden sm:rounded-md mt-10">
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                        <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">SEO</label>
+                        <div class="justify-center">
+                            <div class="mb-3 w-full">                              
+                              <input class="w-full rounded p-2 border" placeholder="SEO Title" id="formFileLg" type="input">
+                            </div>
+                            <div class="mb-3 w-full">                              
+                                <textarea class="w-full rounded p-2 border" placeholder="SEO Detail" id="formFileLg" type="input">
+
+                                </textarea>
+                              </div>
+                        </div>
+                          </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</section>
