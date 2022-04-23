@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/app/model/product.model';
 import { ApiService } from 'src/app/service/api.service';
+//import { URL } from "url";
 
 @Component({
   selector: 'app-update',
@@ -17,6 +18,7 @@ export class UpdateComponent  implements OnInit {
   public selectedFile!: String;
   public uploadedImage: any;
   public productId!: String;
+  public firstImage!: String;
 
   singleProdut: Product = {};
 
@@ -31,7 +33,8 @@ export class UpdateComponent  implements OnInit {
       title:['', [Validators.required]],
       slug:['',[Validators.required, Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]],      
       price:['', [Validators.required]],
-      comparePrice:[''],      inStock:['1',[Validators.required]],
+      comparePrice:[''],      
+      inStock:['1',[Validators.required]],
       detail:[''],
       costPeritem:[''],      
       unit:[''],
@@ -48,19 +51,20 @@ export class UpdateComponent  implements OnInit {
 
   ngOnInit(): void {
     this.getSingleProduct(this.route.snapshot.params['id']);    
+    
+
   }
 
   getSingleProduct(id: string):  void {
     this.productService.getSingleProduct(id).subscribe(
       data => {
-        let getProduct = Object.values(data)[1];
-        console.log(this.createProduct);
+        let getProduct = Object.values(data)[1];       
         this.createProduct.setValue({
           title: getProduct.title,
           slug: getProduct.slug,
           price: getProduct.defultPrice ?? "",
           comparePrice: getProduct.comparePrice ?? "",
-          inStock: getProduct.inStock ?? "",
+          inStock: getProduct.inStock? '1':'0',
           detail: getProduct.detail ?? "",
           costPeritem:getProduct.costPeritem ?? "",      
           unit:getProduct.unit ?? "",
@@ -71,6 +75,8 @@ export class UpdateComponent  implements OnInit {
           seoTitle:getProduct.seoTitle ?? "",
           seoDescription:getProduct.seoDescription ?? ""
         });
+        this.firstImage = this.createProduct.value.image;      
+        
       }
     )
   }
@@ -78,14 +84,19 @@ export class UpdateComponent  implements OnInit {
 
 
   public onSubmit(createProduct: any){
-    if(createProduct.valid) {
-     console.log("-----------------------");
-     console.log(this.createProduct.value);
-     console.log("-----------------------");
-    
-      this.productService.updateProduct(this.route.snapshot.params['id'], this.createProduct.value).subscribe(res=>{
-        console.log(res);        
-        console.log("prodct Updated");
+    if(createProduct.valid) {      
+      this.productService.updateProduct(this.route.snapshot.params['id'], this.createProduct.value).subscribe(res=>{    
+         document.getElementById("respo")?.classList.remove("hidden");      
+         setTimeout(function(){
+          document.getElementById("respo")?.classList.add("hidden")
+         
+         }, 2000  );
+        // if(res.type === HttpEventType.UploadProgress){
+        //   alert("updating");
+        // } else if(res.type === HttpEventType.Response) {
+         
+        // }
+        
       });
     }  else {
       this.validate(createProduct);
@@ -110,20 +121,25 @@ export class UpdateComponent  implements OnInit {
   public upLoadFiletoSvr(event:any) {
     this.selectedFile = event.target.files[0];
     this.productService.uploadFileSrv(this.selectedFile).subscribe(res=>{      
+     
+     console.log(res);
       if(res.type === HttpEventType.UploadProgress){
-        console.log(res.loaded + " / " + res.total)
+        console.log(res.loaded + " / " + res.total);
+        document.getElementById("imagePUp")?.classList.remove("hidden");
       } else if(res.type === HttpEventType.Response) {
         console.log("Uploaded" + res);
-        console.log( res.body);
+        console.log( res.body );
         this.uploadedImage = <any>res.body;
         this.form['image'].setValue(this.imageDispaly());
+        document.getElementById("imagePUp")?.classList.add("hidden");
       }      
     });;
   }
 
 
-  public imageDispaly(){    
-    return "https://ucarecdn.com/"+Object.values(this.uploadedImage)[0] +"/";    
+  public imageDispaly(){ 
+    this.firstImage = '';       
+    return "https://ucarecdn.com/" + Object.values(this.uploadedImage)[0] +"/-/preview/400x400/";
   }
 
 

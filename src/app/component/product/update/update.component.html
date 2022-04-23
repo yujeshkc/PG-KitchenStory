@@ -92,10 +92,23 @@
                               formControlName="image">                         
                               <input class="w-full rounded" id="formFileLg" type="file" 
                               (change)="upLoadFiletoSvr($event)" />
+                              <div class="h-80 w-80 relative">  
+                                <div id="imagePUp" class="h-80 w-80 bg-gray-600 absolute top-0 left-0 rounded opacity-75 hidden">
+                                  <span class="mt-[45%] text-white text-center align-middle h-80 block align-middle">uploading....</span>
+                                </div>                            
+                                <img 
+                                (ngModelChange)="imageDispaly()"
+                                [src]="imageDispaly()"
+                                *ngIf="uploadedImage"
+                                class="image--background object-cover h-80 w-80 my-2 rounded">
 
-                              <img [src]="imageDispaly()"
-                              *ngIf="uploadedImage"
-                              class="image--background" >
+                                <img 
+                                (ngModelChange)="imageDispaly()"
+                                [src]="firstImage"
+                                *ngIf="firstImage"                             
+                                class="image--background object-cover h-80 w-80 my-2 rounded" >
+                              </div>
+
                             </div>
                           </div>
                           </div>
@@ -111,7 +124,7 @@
                           <select id="product-status" name="instock" class="bg-gray-100 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  p-2"
                           formControlName="inStock">
                             <option value="1" selected>Yes</option>
-                            <option value="2">No</option>                    
+                            <option value="0">No</option>                    
                           </select>                        
                           <span class="text-gray-600 text-xs">Is Product is in stock or not</span>
                         </div>                   
@@ -259,3 +272,13 @@
 
     </div>
 </section>
+
+
+<div id="respo" class="space-y-5 max-w-[300px] fixed bottom-4 right-4 hidden transition-all transition ease-out-in delay-150">
+  <div class="p-3 bg-emerald-50 shadow rounded-lg">
+    <h3 class="text-xs border-b border-emerald-200 test-emerald-800 py-2 mb-1 ">Data Saved </h3>
+    <div class="font-sans">
+      Product updated Succesfully
+    </div>
+  </div>  
+ </div>
