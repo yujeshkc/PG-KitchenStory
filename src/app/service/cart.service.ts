@@ -29,7 +29,7 @@ export class CartService {
   getTotalPrice() : number{
     let grandTotal = 0;
     this.cartItemList.map((a:any)=>{
-      grandTotal += a.price;
+      grandTotal += a.defultPrice;
     })
     return Math.round( grandTotal * 100 + Number.EPSILON ) / 100 ;
   }
