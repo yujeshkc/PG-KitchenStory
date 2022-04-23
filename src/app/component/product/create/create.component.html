@@ -1,8 +1,21 @@
 <section class="block my-6">
     <div class="max-w-5xl m-auto">
-        <span class="text-xl mb-6 block font-bold">Add Product</span>
+      <div class="flex">
+        <a href="#" class="text-xl mb-6 block font-medium border border-gray-500 p-2 rounded-full mr-4">
+          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-arrow-left" width="18" height="18" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <line x1="5" y1="12" x2="11" y2="18"></line>
+            <line x1="5" y1="12" x2="11" y2="6"></line>
+         </svg>
+        </a>
+        <div class="text-xl mb-6 block font-medium">Add Product</div>
+      </div>
+
         <form novalidate [formGroup] = "createProduct" (ngSubmit)="onSubmit(createProduct)">
+    
         <div class="md:grid md:grid-cols-3 md:gap-6">
+         
           
            
             <div class="mt-5 md:mt-0 md:col-span-2">
@@ -76,25 +89,70 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                         <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">Image</label>
                         <div class="justify-center">
-                            <div class="mb-3 w-full">                              
-                              <input class="custom-file-input w-full rounded" id="formFileLg" type="file"  formControlName="image">
+                            <div class="mb-3 w-full">     
+                              <input class="w-full rounded p-2 border" id="formImage" hidden type="text"  
+                              *ngIf="uploadedImage"
+                              [value]="imageDispaly()"
+                              formControlName="image">                         
+                              <input class="w-full rounded" id="formFileLg" type="file" 
+                              (change)="upLoadFiletoSvr($event)" />
+
+                              <img [src]="imageDispaly()"
+                              *ngIf="uploadedImage"
+                              class="image--background" >
                             </div>
                           </div>
                           </div>
                     </div>
 
+                  
                     <div id="product-pricing" class="shadow overflow-hidden sm:rounded-md mt-10">
+                      <div class="px-4 py-5 bg-white sm:p-6 border-b border-gray-100">
+                        <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">Stock</label>
+                        <div class="mb-3 w-full"> 
+                          <label for="product-name" class="block text-xs text-gray-700 mb-2">In Stock</label>    
+                          
+                          <select id="product-status" name="instock" class="bg-gray-100 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  p-2"
+                          formControlName="inStock">
+                            <option value="1" selected>Yes</option>
+                            <option value="2">No</option>                    
+                          </select>                        
+                          <span class="text-gray-600 text-xs">Is Product is in stock or not</span>
+                        </div>                   
+                      
+                      
+
+                      <div class="mb-3 w-full"> 
+                        <label for="product-name" class="block text-xs text-gray-700 mb-2">Uint</label>                              
+                        <input class="w-full rounded p-2 border" placeholder="Product Unit" id="formFileLg" type="input"  formControlName="unit">
+                      </div>
+                    </div>                    
+                  </div>
+
+                  <div id="product-pricing" class="shadow overflow-hidden sm:rounded-md mt-10">
                       <div class="px-4 py-5 bg-white sm:p-6 border-b border-gray-100">
                       <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">Pricing</label>
                      
                       <div class="justify-center flex ">
                           <div class="mb-3 w-1/2 mr-4">   
                             <label for="product-name" class="block text-xs text-gray-700 mb-2">Price</label>                           
-                            <input class="w-full rounded p-2 border " placeholder="Price" id="formFileLg" type="input"  formControlName="seoTitle">
+                            <input
+                            [class]="hasError('price')?'border-red-700 border-2':'' "
+                            class="w-full rounded p-2 border " placeholder="Price" id="formFileLg" type="input"  formControlName="price">
+
+                            <div 
+                                *ngIf="hasError('price')"
+                                class="">
+                                  <div  *ngIf="slug?.errors">
+                                      <span class="text-sm pt-2 text-red-700" *ngIf="slug?.errors?.['required']">price is required</span>
+                                      <span class="text-sm pt-2 text-red-700" *ngIf="slug?.errors?.['pattern']">Slug is not Number</span>
+                                  </div>
+                                </div>
+
                           </div>
                           <div class="mb-3 w-1/2"> 
                             <label for="product-name" class="block text-xs text-gray-700 mb-2">Compare at price</label>                              
-                            <input class="w-full rounded p-2 border" placeholder="Compare at price" id="formFileLg" type="input"  formControlName="seoTitle">
+                            <input class="w-full rounded p-2 border" placeholder="Compare at price" id="formFileLg" type="input"  formControlName="comparePrice">
                           </div>                          
                       </div>
                         </div>
@@ -104,29 +162,8 @@
                             <input class="w-full rounded p-2 border" placeholder="Cost per item" id="formFileLg" type="input"  formControlName="costPeritem">
                             <span class="text-gray-600 text-xs">Customers won’t see this price.</span>
                           </div>  
-                        </div>
-                        
+                        </div>                        
                   </div>
-                   
-
-
-                    <div id="meta-option" class="shadow overflow-hidden sm:rounded-md mt-10">
-                        <div class="px-4 py-5 bg-white sm:p-6">
-                        <label for="product-name" class="block text-sm font-medium text-gray-700 mb-4">Option</label>
-                        <p>This product has options, like size or color</p>
-                        <div class="justify-center">
-                            <div class="mb-3 w-full">                              
-                              <input class="w-full rounded p-2 border" placeholder="SEO Title" id="formFileLg" type="input"  formControlName="seoTitle">
-                            </div>
-                            <div class="mb-3 w-full">                              
-                                <textarea class="w-full rounded p-2 border" placeholder="SEO Detail" id="formFileLg" type="input"  formControlName="seoDetail">
-
-                                </textarea>
-                              </div>
-                        </div>
-                          </div>
-                    </div>
-
 
                     <div id="meta-seo" class="shadow overflow-hidden sm:rounded-md mt-10">
                       <div class="px-4 py-5 bg-white sm:p-6">
@@ -136,7 +173,7 @@
                             <input class="w-full rounded p-2 border" placeholder="SEO Title" id="formFileLg" type="input"  formControlName="seoTitle">
                           </div>
                           <div class="mb-3 w-full">                              
-                              <textarea class="w-full rounded p-2 border" placeholder="SEO Detail" id="formFileLg" type="input"  formControlName="seoDetail">
+                              <textarea class="w-full rounded p-2 border" placeholder="SEO Detail" id="formFileLg" type="input"  formControlName="seoDescription">
                               </textarea>
                             </div>
                       </div>
@@ -152,9 +189,10 @@
                 <div class="cursor-pointer block p-4 border-b border-gray-100">
                   <span class="text mb-4 block font-medium font-weight">Product Status</span>
 
-                  <select id="product-status" name="status" class="bg-gray-100 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  p-2">
-                    <option>Draft</option>
-                    <option>Published</option>                    
+                  <select id="product-status" name="status" class="bg-gray-100 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  p-2"
+                  formControlName="status">
+                    <option value="0">Draft</option>
+                    <option value="1">Published</option>                    
                   </select>
 
                 </div>
@@ -175,7 +213,19 @@
                 <label for="product-name" class="block text-sm font-medium text-gray-700 mb-2">Category</label>
                 <div class="justify-center">
                     <div class="mb-3 w-full">                              
-                      <input class="w-full rounded p-2 border" id="formFileLg" type="input"  formControlName="category">
+                      <input 
+                      class="w-full rounded p-2 border"
+                      [class]="hasError('category')?'border-red-700 border-2':'' "
+                    
+                      id="formFileLg" type="input"  
+                      formControlName="category">
+                      <div 
+                                *ngIf="hasError('category')"
+                                class="">
+                                  <div  *ngIf="slug?.errors">
+                                      <span class="text-sm pt-2 text-red-700" *ngIf="slug?.errors?.['required']">Category is required</span>                                     
+                                  </div>
+                                </div>
                       <span class="text-xs mt-2 block text-gray-500">Add product to category so it will be easy to find in your store</span>
                     </div>
                   </div>
@@ -185,7 +235,16 @@
                   <a class="text-xs mb-2 block text-blue-600" href="#">view all tags</a>
                   <div class="justify-center">
                       <div class="mb-3 w-full">                              
-                        <input class="w-full rounded p-2 border" id="formFileLg" type="input"  formControlName="category">
+                        <input class="w-full rounded p-2 border"
+                        [class]="hasError('tag')?'border-red-700 border-2':'' "
+                        id="formFileLg" type="input"  formControlName="tag">
+                        <div 
+                        *ngIf="hasError('tag')"
+                        class="">
+                          <div  *ngIf="slug?.errors">
+                              <span class="text-sm pt-2 text-red-700" *ngIf="slug?.errors?.['required']">Tag is required</span>                                     
+                          </div>
+                        </div>
                         <span class="text-xs mt-2 block text-gray-500">Add tags to product so it will be easy to find in your store</span>
                       </div>
                     </div>
@@ -195,6 +254,11 @@
            </div>
            
         </div>
+        <input class="hidden"
+        id="formFileLg" type="input"  formControlName="tag" 
+        *ngIf="productId" 
+        [value]="productId"
+        >
       </form>
 
     </div>

@@ -11,7 +11,7 @@ import { LoginComponent } from './component/login/login.component';
 
 
 const routes: Routes = [
-  {path: "", redirectTo: 'products', pathMatch:'full'},
+  {path: "", redirectTo: 'login', pathMatch:'full'},
   {path: 'products', loadChildren: () => import('./component/product/product-routing/product-routing.module').then(m=>m.ProductRoutingModule)},
   {path: 'users', loadChildren: () => import('./component/users/user-routing/user-routing.module').then(m=>m.UserRoutingModule)},
   {path: 'register', component: RegisterComponent},

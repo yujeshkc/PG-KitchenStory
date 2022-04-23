@@ -14,6 +14,7 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     this.api.getProduct().subscribe(res => {
+      //console.log(res);
       this.productList = res;
     })
   }

@@ -1,6 +1,7 @@
-import { UpperCasePipe } from '@angular/common';
+import { HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -11,17 +12,33 @@ import { ApiService } from 'src/app/service/api.service';
 export class CreateComponent implements OnInit {
 
   public createProduct: FormGroup;
+  public selectedFile!: String;
+  public uploadedImage: any;
+  public productId!: String;
   
-  constructor(private formBuilder: FormBuilder, private productService: ApiService ) { 
+
+
+  
+  constructor(
+    private router: Router, 
+    private formBuilder: FormBuilder,
+    private productService: ApiService 
+    ) { 
+
+  
+
     this.createProduct = this.formBuilder.group({
       title:['', [Validators.required]],
-      slug:['',[Validators.required, Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]],
-      price:[''],
-      inStock:['',[Validators.required]],
+      slug:['',[Validators.required, Validators.pattern('^[a-z0-9]+(?:-[a-z0-9]+)*$')]],      
+      price:['', [Validators.required]],
+      comparePrice:[''],      inStock:['1',[Validators.required]],
       detail:[''],
+      costPeritem:[''],      
       unit:[''],
       image:[''],
       category:['', [Validators.required]],
+      tag:['', [Validators.required]],
+      status:[''],
       seoTitle:[''],
       seoDetail:['']
     });
@@ -33,10 +50,11 @@ export class CreateComponent implements OnInit {
 
   public onSubmit(createProduct: any){
     if(createProduct.valid) {
-      console.log(this.createProduct.value);
+     // console.log(this.createProduct.value);
       this.productService.addProduct(this.createProduct.value).subscribe(res=>{
-        console.log(res);
+        console.log(Object.values(res)[14]);        
         console.log("prodct created ");
+       this.router.navigate(['/update/'+Object.values(res)[14]]);
       });
     }  else {
       this.validate(createProduct);
@@ -57,6 +75,26 @@ export class CreateComponent implements OnInit {
       .replace(/-+$/, '');            // Trim - from end of text  
     
   }
+
+  public upLoadFiletoSvr(event:any) {
+    this.selectedFile = event.target.files[0];
+    this.productService.uploadFileSrv(this.selectedFile).subscribe(res=>{      
+      if(res.type === HttpEventType.UploadProgress){
+        console.log(res.loaded + " / " + res.total)
+      } else if(res.type === HttpEventType.Response) {
+        console.log("Uploaded" + res);
+        console.log( res.body);
+        this.uploadedImage = <any>res.body;
+        this.form['image'].setValue(this.imageDispaly());
+      }      
+    });;
+  }
+
+
+  public imageDispaly(){    
+    return "https://ucarecdn.com/"+Object.values(this.uploadedImage)[0] +"/";    
+  }
+
 
   validate(form:any){
     Object.keys(form.controls).forEach(field => {
@@ -88,6 +126,10 @@ export class CreateComponent implements OnInit {
 
   get title(){
     return this.form['title'];
+  }
+
+  get price(){
+    return this.form['price'];
   }
 
   get slug(){
