@@ -25,24 +25,24 @@
 
         <ng-container *ngFor="let item of productList">
         
-        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-            {{item.title}}
-            </th>
-           
-            <td class="px-6 py-4">
-                {{item.Category }}
-            </td>
-            <td class="px-6 py-4">
-                {{item.defultPrice}} / {{item.unit}} 
-            </td>
-            <td class="px-6 py-4 text-right">
-               
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                {{item.title}}
+                </th>
+            
+                <td class="px-6 py-4">
+                    {{item.Category }}
+                </td>
+                <td class="px-6 py-4">
+                    {{item.defultPrice}} / {{item.unit}} 
+                </td>
+                <td class="px-6 py-4 text-right">
+                
 
-            <a
-            routerLink="/products/update/{{item._id}}"
-            class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
-            </td>
+                <a
+                routerLink="/products/update/{{item._id}}"
+                class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                </td>
             </tr>
         </ng-container>
     </tbody>
