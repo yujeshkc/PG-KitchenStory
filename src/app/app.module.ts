@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './component/header/header.component';
 import { ProductComponent } from './component/product/product.component';
 import { CartComponent } from './component/cart/cart.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CheckoutComponent } from './component/checkout/checkout.component';
 import { FilterPipe } from './shared/filter.pipe';
 import { NotFoundComponent } from './component/not-found/not-found.component';
@@ -15,8 +15,12 @@ import { UsersComponent } from './component/users/users.component';
 
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UsersModule } from './component/users/users.module';
+import { AuthGuard } from './guard/auth.guard';
+import { AuthInterceptor } from './guard/auth.interceptor';
+import { UserService } from './service/user.service';
+import { AccountComponent } from './component/account/account.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ import { UsersModule } from './component/users/users.module';
     NotFoundComponent,
     UsersComponent,
     RegisterComponent,
-    LoginComponent   
+    LoginComponent,
+    AccountComponent   
   ],
   imports: [
     BrowserModule,
@@ -37,9 +42,19 @@ import { UsersModule } from './component/users/users.module';
     ProductModule,
     UsersModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi:true
+
+    },
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

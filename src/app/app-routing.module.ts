@@ -8,6 +8,8 @@ import { ProductRoutingModule } from './component/product/product-routing/produc
 import { UserRoutingModule } from './component/users/user-routing/user-routing.module';
 import { RegisterComponent } from './component/register/register.component';
 import { LoginComponent } from './component/login/login.component';
+import { AccountComponent } from './component/account/account.component';
+import { AuthGuard } from './guard/auth.guard';
 
 
 const routes: Routes = [
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'checkout', component: CheckoutComponent},
+  {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard], data:{roles: ['admin']}},
+  {path: 'account', component: AccountComponent},
   {path:'**', component:NotFoundComponent},
 
 
@@ -31,4 +34,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

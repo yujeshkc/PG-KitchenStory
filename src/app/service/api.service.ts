@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import {map} from 'rxjs/operators';
 import { Product } from '../model/product.model';
 
@@ -9,7 +9,7 @@ import { Product } from '../model/product.model';
 })
 export class ApiService {
 
-  
+
 
   constructor(private http: HttpClient) { }
 
@@ -18,8 +18,7 @@ export class ApiService {
   //get all product
   getProduct(){
     return this.http.get<any>(this.url)
-    .pipe(map((res:any)=>{
-      console.log(res);
+    .pipe(map((res:any)=>{      
       return res;
     }))
   }
@@ -53,5 +52,12 @@ export class ApiService {
     });
   }
 
+  public deleteProduct(id: any): Observable<Product>{
+    console.log('deleteuser')
+    return this.http.delete(`${this.url}/${id}`);
+  }
+
 
 }
+
+

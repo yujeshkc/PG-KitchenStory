@@ -10,6 +10,8 @@ import { User } from '../model/user.model';
 export class UserService {
     
     
+
+
     constructor(private http: HttpClient) { }
     private url:string= "http://localhost:3000/user";
 
@@ -19,7 +21,7 @@ export class UserService {
         .pipe(map((res:any)=>{
         console.log(res);
         return res;
-        }))
+        }));
     }
 
     //add product
@@ -37,6 +39,22 @@ export class UserService {
         console.log(data);
         return this.http.put(`${this.url}/${id}`, data);
     }
+
+    deleteUser(id: any){       
+        return this.http.delete(`${this.url}/${id}`);
+    }
+
+
+    // removeCartItem(product: any){
+    //     this.userList.map((a:any, index:any)=>{
+    //       if(product.id=== a.id){
+    //         this.userList.splice(index,1);
+    //       }
+    //     })
+    //     this.userList.next(this.userList);
+    //   }
+
+
 
 
 

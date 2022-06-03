@@ -1,1 +1,26 @@
-<p>checkout works!</p>
+<div class="container px-4 mx-auto max-w-6xl mt-8">
+
+    <ng-container *ngIf="(products.length !=0 && orderSuccess == false)">
+    <span  class="lg text-lg text-bold font-bold mb-4">Select Payment</span>
+    <div class="payment bg-white p-6 rounded-lg   mt-6">  
+       <span class="text-d">Total Amount: {{allTotal}} </span>
+        <div class="flex ">
+            <div  class="block border flex p-5 mt-2 mr-4 rounded-full w-[200px] center hover:bg-blue-500 hover:text-white cursor-pointer" on (click)="selectPayment('cod')">Cash on Delivery</div>
+
+            
+            <div  (click)="selectPayment('paypal')" class="block border p-5 mt-2 rounded-full w-[200px] center hover:bg-blue-500 hover:text-white cursor-pointer">Paypal</div>
+        </div>
+
+    </div>
+    <div class="next bg-emerald-900 hover:bg-emerald-800 p-6 text-white mt-10 rounded-full w-[128px] cursor-pointer" *ngIf="paymentMethod" (click)="orderConfirm()"> Order </div>
+    </ng-container>
+
+<ng-container *ngIf="(products.length ==0 && orderSuccess == false)">
+    <div class="payment bg-white p-6 rounded-lg   mt-6"> Nothing Checkout. </div>
+</ng-container>
+
+<ng-container *ngIf="(products.length ==0 && orderSuccess == true)">
+    <div class="payment bg-white p-6 rounded-lg   mt-6"> Order Confirm Thank you for your order  </div>
+</ng-container>
+
+</div>

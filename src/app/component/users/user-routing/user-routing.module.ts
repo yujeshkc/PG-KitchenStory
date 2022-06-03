@@ -6,15 +6,16 @@ import { CreateComponent } from '../create/create.component';
 import { ListComponent } from '../list/list.component';
 import { UpdateComponent } from '../update/update.component';
 import { DetailComponent } from '../detail/detail.component';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 
 
 
 const routes: Routes = [
   {path:'', component: UsersComponent},
-  {path: 'create', component: CreateComponent},
-  {path: 'list', component: ListComponent},
-  {path: 'update/:id', component: UpdateComponent},
-  {path: 'detail', component: DetailComponent}
+  {path: 'create', component: CreateComponent , canActivate:[AuthGuard], data:{roles: ['admin']}},
+  {path: 'list', component: ListComponent , canActivate:[AuthGuard], data:{roles: ['admin']}},
+  {path: 'update/:id', component: UpdateComponent, canActivate:[AuthGuard], data:{roles: ['admin']}},
+  {path: 'detail', component: DetailComponent, canActivate:[AuthGuard], data:{roles: ['admin']}},
 ];
 
 @NgModule({

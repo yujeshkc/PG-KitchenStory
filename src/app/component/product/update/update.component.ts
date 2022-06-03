@@ -58,7 +58,11 @@ export class UpdateComponent  implements OnInit {
   getSingleProduct(id: string):  void {
     this.productService.getSingleProduct(id).subscribe(
       data => {
-        let getProduct = Object.values(data)[1];       
+        let getProduct = Object.values(data)[1];   
+          
+        if( Object.values(data)[0] === false) {
+          this.router.navigate(['/404']);
+        }
         this.createProduct.setValue({
           title: getProduct.title,
           slug: getProduct.slug,
@@ -75,8 +79,7 @@ export class UpdateComponent  implements OnInit {
           seoTitle:getProduct.seoTitle ?? "",
           seoDescription:getProduct.seoDescription ?? ""
         });
-        this.firstImage = this.createProduct.value.image;      
-        
+        this.firstImage = this.createProduct.value.image;        
       }
     )
   }

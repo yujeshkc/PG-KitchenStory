@@ -36,9 +36,28 @@
                     </div>
                   </div>
     
-                  <div class="col-span-6 sm:col-span-3">
                   
-                  </div>              
+              <div class="col-span-6 sm:col-span-3">
+                <label for="usergroup" class="block text-sm font-medium text-gray-700">User Group</label>
+
+                <select id="usergroup" name="usergroup" autocomplete="usergroup-name" class="bg-gray-100 mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm  p-2"     
+                [class]="hasError('usergroup')?'border-red-700 border-2':'' "          
+                formControlName="usergroup"
+                >
+                  <option value="admin">Admin</option>
+                  <option value="user">User</option>
+                  <option value="customer">Customer</option>
+                </select>
+                <div 
+                *ngIf="hasError('usergroup')"
+                class="">
+                  <div  *ngIf="fullName?.errors">
+                      <span class="text-sm pt-2 text-red-700" *ngIf="fullName?.errors?.['required']">
+                        User Group is required
+                      </span>                                                               
+                  </div>
+                </div>
+              </div>               
     
                   <div class="col-span-6 sm:col-span-3">
                     <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>

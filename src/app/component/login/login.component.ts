@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
 
 
 @Component({
@@ -12,10 +14,14 @@ export class LoginComponent implements OnInit {
   public loginForm : FormGroup;
 
   
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private loginService: AuthService,
+    private router: Router,
+    ) {
 
     this.loginForm =  this.formBuilder.group({
-      email:['', [Validators.required, Validators.minLength(4), Validators.maxLength(40), Validators.email]],
+      username:['', [Validators.required, Validators.minLength(4), Validators.maxLength(40)]],
       password:['',[Validators.required,Validators.minLength(8), Validators.maxLength(80)]],
       rememberMe:[false]
     });
@@ -23,10 +29,27 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if(this.loginService.isLoggedIn()){
+      this.router.navigate(['/']);
+    }
   }
 
-  public onSubmit(loginForm: any){
+  onSubmit(loginForm: any){
     if(loginForm.valid) {
+      this.loginService.login(this.loginForm.value)
+      .subscribe(
+        (data: any) => {
+          console.log(data[0].token);
+          localStorage.setItem('token', data[0].token);
+          localStorage.setItem('user', data[1].username);
+          localStorage.setItem('role', data[1].role);
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log("Server Error");
+          console.log(error);
+        }
+      )
       console.log(this.loginForm.value);
     }  else {
       console.log("invalid form");

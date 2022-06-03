@@ -9,13 +9,23 @@ import { CartService } from 'src/app/service/cart.service';
 })
 export class ProductComponent implements OnInit {
 
-  public productList: any;
-  constructor(private api: ApiService,  private cartService : CartService) { }
+  public productList  : any;
+  public searchKey    : string = "";
+
+  constructor(
+    private api: ApiService,
+    private cartService : CartService
+    ) { }
 
   ngOnInit(): void {
     this.api.getProduct()
     .subscribe(res => {
       this.productList = res;
+     
+    });
+
+    this.cartService.search.subscribe((val:any)=>{
+      this.searchKey = val;
     })
 
   }

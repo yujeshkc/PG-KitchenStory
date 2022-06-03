@@ -6,7 +6,7 @@ import { ListComponent } from './list/list.component';
 import { UpdateComponent } from './update/update.component';
 import { DetailComponent } from './detail/detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { AppRoutingModule } from 'src/app/app-routing.module';
 
 
 
@@ -18,10 +18,11 @@ import { ReactiveFormsModule } from '@angular/forms';
     CreateComponent,
     ListComponent,
     UpdateComponent,
-    DetailComponent
+    DetailComponent,
   ],
   imports: [
     CommonModule,
+    AppRoutingModule,
     ReactiveFormsModule //import here
   ]
 })

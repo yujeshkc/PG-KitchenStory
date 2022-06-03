@@ -13,10 +13,23 @@ export class ListComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.loadUser();
+  }
+
+  loadUser(){
     this.userService.getUsers().subscribe(res => {
       //console.log(res);
       this.userList = res;
     })
+  }
+
+  deleteUser(id: any, name: String){   
+    if(confirm("Are you sure to delete this User: "+name)) {
+      this.userService.deleteUser(id).subscribe(data=> {       
+        this.loadUser();
+      })
+    } 
+        
   }
 
 }

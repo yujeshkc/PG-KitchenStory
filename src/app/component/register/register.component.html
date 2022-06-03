@@ -1,1 +1,106 @@
-<p>register works!</p>
+<section class="font-poppins">
+    <div class="max-w-xl mx-auto ">
+        <div class="lg:py-7">
+            <div class="max-w-4xl lg:p-8 dark:bg-gray-800 ">
+                <h2 class="mb-4 text-2xl font-bold text-gray-700 lg:mb-7 lg:text-3xl dark:text-gray-300">
+                    Register to New account</h2>
+                <p class="text-gray-500 dark:text-gray-400 mb-7">create new account</p>
+                <form novalidate [formGroup] = "registerForm" (ngSubmit)="onSubmit(registerForm)">
+                    <div class="mb-4 lg:mb-7">                        
+                        <input 
+                            formControlName="username"
+                            type="username"
+                            class="w-full px-4 py-4 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700"  
+                            [class]="hasError('username')?'border-red-700 border-2':'border-green-700 border-2' " 
+                            name="" placeholder="Enter your username">
+                            <div  *ngIf="hasError('username')" [class]="hasError('username')?'error block w-full text-left':'' ">                            
+                                <div *ngIf="email?.errors">
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['required']">Username is required fields</span>
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['minlength']">Username is min Length 4</span>
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['maxlength']">Username is max Length 40</span>
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['email']">Username is not valid email</span>
+                                </div>
+                            </div>  
+                    
+                    </div>
+                    <div class="mb-4 lg:mb-7">                      
+                            
+                            <input 
+                                type="password"
+                                formControlName="password"
+                                class="w-full px-4 py-4 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700"
+                                [class]="hasError('password')?'border-red-700 border-2':''" 
+                                name="" placeholder="Enter password">
+
+                                <div  *ngIf="hasError('password')" [class]="hasError('password')?'error block w-full text-left':'' ">                            
+                                    <div *ngIf="password?.errors">
+                                        <span class="text-sm pt-2 text-red-700" *ngIf="password?.errors?.['required']">Password is required fields</span>
+                                        <span class="text-sm pt-2 text-red-700" *ngIf="password?.errors?.['minlength']">Password is min Length 8</span>
+                                        <span class="text-sm pt-2 text-red-700" *ngIf="password?.errors?.['maxlength']">Password is max Length 80</span>
+                                        <span class="text-sm pt-2 text-red-700" *ngIf="password?.errors?.['email']">Password is not valid email</span>
+                                    </div>
+                                </div>  
+
+                               
+                            
+                        
+                    </div>
+                    <div class="mb-4 lg:mb-7">                      
+                            
+                        <input 
+                            type="password"
+                            formControlName="confirmPassword"
+                            class="w-full px-4 py-4 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700"
+                            [class]="hasError('confirmPassword')?'border-red-700 border-2':''" 
+                            name="" placeholder="Enter Re-password">
+
+                            <div  *ngIf="hasError('confirmPassword')" [class]="hasError('confirmPassword')?'error block w-full text-left':'' ">                            
+                               
+                                    <span class="text-sm pt-2 text-red-700" >Password and confirm password should match</span>
+                                   
+                                
+                            </div>  
+
+                           
+                        
+                    
+                </div>
+                    <div class="mb-4 lg:mb-7">                        
+                        <input 
+                            formControlName="email"
+                            type="email"
+                            class="w-full px-4 py-4 bg-white rounded-lg lg:py-5 dark:text-gray-300 dark:bg-gray-700"  
+                            [class]="hasError('email')?'border-red-700 border-2':'' " 
+                            name="" placeholder="Enter your email">
+                            <div  *ngIf="hasError('email')" [class]="hasError('email')?'error block w-full text-left':'' ">                            
+                                <div *ngIf="email?.errors">
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['required']">Email is required fields</span>
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['minlength']">Email is min Length 4</span>
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['maxlength']">Email is max Length 40</span>
+                                    <span class="text-sm pt-2 text-red-700" *ngIf="email?.errors?.['email']">Email is not valid email</span>
+                                </div>
+                            </div>  
+                    
+                    </div>
+                    <div class="flex items-center justify-between mb-4 lg:mb-7">
+                        <label for="" class="flex dark:text-gray-300">
+                            <input type="checkbox" class="mt-1 mr-2" formControlName="agreeTerms">
+                            <span class="text-sm ">I agree all the terms and condiction</span>
+                        </label>
+                        <div  *ngIf="hasError('agreeTerms')">
+                           <span class="text-sm pt-2 text-red-700">This is required</span> 
+                        </div>
+                    </div>
+                    <button
+                        class="w-full px-4 py-4 text-sm font-bold text-gray-300 uppercase bg-emerald-600 rounded-md lg:text-lg dark:text-gray-300 dark:bg-emerald-800 hover:bg-emerald-700 dark:hover:bg-emerald-900 "
+                        type="submit">REGISTER</button>  
+                                            
+                   
+                </form>
+                {{successMessage}}
+                <div class="mt-4 text-md text-gray-700">Already have account <a class=" text-emerald-700 underline" routerLink="/login">login here.</a> 
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

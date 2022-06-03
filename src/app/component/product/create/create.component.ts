@@ -52,9 +52,7 @@ export class CreateComponent implements OnInit {
     if(createProduct.valid) {
      // console.log(this.createProduct.value);
       this.productService.addProduct(this.createProduct.value).subscribe(res=>{
-        console.log(Object.values(res)[14]);        
-        console.log("prodct created ");
-        this.router.navigate(['/update/'+Object.values(res)[14]]);
+        this.router.navigate(['/update/'+res]);
       });
     }  else {
       this.validate(createProduct);

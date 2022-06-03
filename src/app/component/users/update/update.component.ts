@@ -27,7 +27,7 @@ export class UpdateComponent implements OnInit {
     this.createUser =  this.fromBuilder.group({
         fullName: ['', [Validators.required, Validators.minLength(3)]],
         email:['', [Validators.required, Validators.email, Validators.minLength(1), Validators.maxLength(80)]],
-        username:['',[Validators.required, Validators.minLength(5)]],
+        username:['',[Validators.required, Validators.minLength(5)]],       
         password:['', [Validators.required, Validators.minLength(6)]],
         country:[''],
         city:[''],

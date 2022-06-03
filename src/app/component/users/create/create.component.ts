@@ -25,6 +25,7 @@ export class CreateComponent implements OnInit {
         fullName: ['', [Validators.required, Validators.minLength(3)]],
         email:['', [Validators.required, Validators.email, Validators.minLength(1), Validators.maxLength(80)]],
         username:['',[Validators.required, Validators.minLength(5)]],
+        usergroup:['',[Validators.required]],
         password:['', [Validators.required, Validators.minLength(6)]],
         country:[''],
         city:[''],
@@ -44,9 +45,9 @@ export class CreateComponent implements OnInit {
   public onSubmit(createUser: any){
     if(createUser.valid) {
       this.userService.addUser(this.createUser.value).subscribe(res=>{
-        //console.log(Object.values(res));        
+        console.log(Object.values(res));        
         console.log("user created ");
-        this.router.navigate(['users/update/'+Object.values(res)[10]]); 
+        this.router.navigate(['users/update/'+Object.values(res)[12]]); 
       });
     } else {
       this.validate(createUser);

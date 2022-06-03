@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiService } from 'src/app/service/api.service';
 
 @Component({
@@ -13,10 +14,21 @@ export class ListComponent implements OnInit {
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
+    this.loadProductList();
+  }
+
+  loadProductList() {
     this.api.getProduct().subscribe(res => {
       //console.log(res);
       this.productList = res;
     })
+  }
+
+  deleteProduct(id: any){
+    this.api.deleteProduct(id).subscribe(res => {
+      console.log(res);
+    })
+    this.loadProductList();   
   }
 
 }

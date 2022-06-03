@@ -173,7 +173,7 @@
                             <input class="w-full rounded p-2 border" placeholder="SEO Title" id="formFileLg" type="input"  formControlName="seoTitle">
                           </div>
                           <div class="mb-3 w-full">                              
-                              <textarea class="w-full rounded p-2 border" placeholder="SEO Detail" id="formFileLg" type="input"  formControlName="seoDescription">
+                              <textarea class="w-full rounded p-2 border" placeholder="SEO Detail" id="formFileLg" type="input"  formControlName="seoDetail">
                               </textarea>
                             </div>
                       </div>
@@ -220,9 +220,9 @@
                       id="formFileLg" type="input"  
                       formControlName="category">
                       <div 
-                                *ngIf="hasError('category')"
-                                class="">
-                                  <div  *ngIf="slug?.errors">
+                               *ngIf="hasError('category')"
+                               class="">
+                               <div  *ngIf="slug?.errors">
                                       <span class="text-sm pt-2 text-red-700" *ngIf="slug?.errors?.['required']">Category is required</span>                                     
                                   </div>
                                 </div>
