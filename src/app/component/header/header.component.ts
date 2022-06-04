@@ -15,8 +15,7 @@ export class HeaderComponent implements OnInit {
   public showDropdown : boolean = false;
   public searchTerm   : string = '';
 
-  @Output()
-  searchTextChange: EventEmitter<string> = new EventEmitter<string>();
+
 
   constructor(
     private cartService  : CartService,
@@ -49,10 +48,6 @@ export class HeaderComponent implements OnInit {
     this.cartService.search.next(this.searchTerm);
   }
 
-  onSearchtextChange(){
-    this.searchTextChange.emit(this.searchTerm);
-    console.log(  this.searchTextChange );
-  }
 
   logout() {   
     this.authService.clear();

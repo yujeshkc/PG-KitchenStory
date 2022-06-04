@@ -35,14 +35,6 @@ export class CheckoutComponent implements OnInit {
   } 
 
 
-  
-  // nsgOnInit(): void {
-  //   this.cartService.getProducts()
-  //   .subscribe(res=>{
-  //     this.products = res;
-  //     this.allTotal = this.cartService.getTotalPrice();
-  //   })
-  // }
 
   selectPayment(payment: string){
     this.paymentMethod = payment;

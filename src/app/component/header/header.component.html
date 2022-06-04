@@ -6,12 +6,7 @@
             </a>
 
             <ul class="hidden lg:flex lg:mx-auto lg:items-center lg:w-auto">
-                <li>
-                    <a class="text-base p-5 text-white uppercase hover:text-white hover:bg-green-700 border-r border-l border-emerald-800 cursor-pointer">Grocery</a>
-                </li>
-                <li>
-                    <a class="text-base p-5 text-white uppercase hover:text-white hover:bg-green-700 border-r border-l border-emerald-800 cursor-pointer">Vegetable</a>
-                </li>
+              
                 <li class="relative" *ngIf="authService.roleMatch('admin')" (click)="showDropdownAdmin()">
                     <a class="cursor-pointer text-base p-5 text-white uppercase hover:text-white hover:bg-green-700 border-r border-l border-emerald-800"   >Admin</a>
 
