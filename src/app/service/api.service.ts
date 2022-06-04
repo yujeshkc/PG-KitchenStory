@@ -16,11 +16,19 @@ export class ApiService {
   private url:string= "http://localhost:3000/product";
 
   //get all product
-  getProduct(){
-    return this.http.get<any>(this.url)
-    .pipe(map((res:any)=>{      
-      return res;
-    }))
+  getProduct(searchKey: string = "" ){
+    if(searchKey){
+      return this.http.get<any>(this.url + "?s="+searchKey)
+      .pipe(map((res:any)=>{      
+        return res;
+      }))
+    } else {
+      return this.http.get<any>(this.url)
+      .pipe(map((res:any)=>{      
+        return res;
+      }))
+    }
+   
   }
 
 

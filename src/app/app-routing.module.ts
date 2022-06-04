@@ -19,7 +19,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'cart', component: CartComponent},
-  {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard], data:{roles: ['admin']}},
+  {path: 'checkout', component: CheckoutComponent, canActivate:[AuthGuard], data:{roles: ['user']}},
   {path: 'account', component: AccountComponent},
   {path:'**', component:NotFoundComponent},
 

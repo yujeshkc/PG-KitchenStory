@@ -34,7 +34,8 @@ import { AccountComponent } from './component/account/account.component';
     UsersComponent,
     RegisterComponent,
     LoginComponent,
-    AccountComponent   
+    AccountComponent,
+    FilterPipe 
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { CartService } from 'src/app/service/cart.service';
+
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,9 @@ export class HeaderComponent implements OnInit {
   public totalItem    : number = 0;
   public showDropdown : boolean = false;
   public searchTerm   : string = '';
+
+  @Output()
+  searchTextChange: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(
     private cartService  : CartService,
@@ -41,9 +45,13 @@ export class HeaderComponent implements OnInit {
   }
 
   search(event: any){
-    this.searchTerm = (event.target as HTMLInputElement).value;
-    //console.log( this.searchTerm );
+    this.searchTerm = (event.target as HTMLInputElement).value;    
     this.cartService.search.next(this.searchTerm);
+  }
+
+  onSearchtextChange(){
+    this.searchTextChange.emit(this.searchTerm);
+    console.log(  this.searchTextChange );
   }
 
   logout() {   
